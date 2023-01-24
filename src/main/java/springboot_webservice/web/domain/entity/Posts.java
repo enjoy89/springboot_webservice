@@ -18,6 +18,8 @@ public class Posts extends BaseTimeEntity {
     private String title;
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
+    @Column(nullable = false)
     private String writer;
 
     @Builder
