@@ -1,40 +1,40 @@
 package springboot_webservice.web.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import springboot_webservice.web.domain.entity.Posts;
+import lombok.*;
+import springboot_webservice.web.domain.entity.Post;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @ToString
-public class PostsDto {
+public class PostDto {
 
     private Long id;
     private String title;
     private String content;
-    private String writer;
+    private String author;
+    private String category;
     private LocalDateTime createDate;
     private LocalDateTime modifiedDate;
 
-    public Posts toEntity() {
-        Posts posts = Posts.builder()
+    public Post toEntity() {
+        Post post = Post.builder()
                 .title(title)
                 .content(content)
-                .writer(writer)
+                .author(author)
+                .category(category)
                 .build();
-
-        return posts;
+        return post;
     }
 
     @Builder
-    public PostsDto(String title, String content, String writer, LocalDateTime createDate, LocalDateTime modifiedDate) {
+    public PostDto(String title, String content, String author, String category, LocalDateTime createDate, LocalDateTime modifiedDate) {
         this.title = title;
         this.content = content;
-        this.writer = writer;
+        this.author = author;
+        this.category = category;
         this.createDate = createDate;
         this.modifiedDate = modifiedDate;
     }
