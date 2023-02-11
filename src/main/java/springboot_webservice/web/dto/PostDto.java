@@ -10,32 +10,30 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class PostDto {
-
     private Long id;
     private String title;
     private String content;
     private String author;
-    private String category;
-    private LocalDateTime createDate;
+    private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     public Post toEntity() {
         Post post = Post.builder()
+                .id(id)
                 .title(title)
                 .content(content)
                 .author(author)
-                .category(category)
                 .build();
         return post;
     }
 
     @Builder
-    public PostDto(String title, String content, String author, String category, LocalDateTime createDate, LocalDateTime modifiedDate) {
+    public PostDto(Long id, String title, String content, String author, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
-        this.category = category;
-        this.createDate = createDate;
+        this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }
 }

@@ -19,16 +19,14 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column(length = 10, nullable = false)
     private String author;
 
-    private String category;
-
     @Builder
-    public Post(String title, String content, String author, String category) {
+    public Post(Long id, String title, String content, String author) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
-        this.category = category;
     }
 }
