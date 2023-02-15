@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('게시글 목록')">
+    <meta charset="utf-8">
+</head>
+<body>
+<nav th:replace="fragments/common :: menu(post)">
+</nav>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게시판</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-secondary float-right"
+                    th:onclick="|location.href='@{/post/add}'|">글쓰기
+            </button>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="table-light">
+            <tr>
+                <th>No</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${post}">
+                <td><a th:text="${post.id}"></a></td>
+                <td><a th:href="@{/post/{postId}(postId=${post.id})}"
+                       th:text="${post.title}"></a></td>
+                <td><a th:text="${post.author}"></a></td>
+                <td>0</td>
+                <td th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd')}"></td>
+                <!--                <td th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            </tr>
+            </tbody>
+        </table>
+        <div>total : <span th:text="${#lists.size(post)}"></span>
+        </div>
+    </div>
+</div>
+</body>
+<div th:insert="fragments/footer.html" id="footer"></div>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('게시글 등록')">
+    <meta charset="utf-8">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/common :: menu(post)">
+</nav>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center ">
+        <h2>게시글 등록 폼</h2>
+    </div>
+
+    <form th:action="@{/post/add}" th:object="${postDto}" method="post">
+        <div class="container">
+            <hr class="my-4">
+            <div class="form-group">
+                <label for="title" class="col-form-label">제목</label>
+                <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="제목">
+            </div>
+            <div class="form-group">
+                <label for="author" class="col-form-label">작성자</label>
+                <input type="text" th:field="*{author}" class="form-control" id="author" placeholder="작성자">
+            </div>
+            <div class="form-group">
+                <label for="content" class="col-form-label">내용</label>
+                <textarea th:field="*{content}" class="form-control" id="content" rows="7"
+                          placeholder="내용을 입력해주세요."></textarea><br>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-secondary" th:onclick="|location.href='@{/post/list}'|" type="button">취소</button>
+                <button class="btn btn-secondary" type="submit">저장</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:insert="fragments/footer.html" id="footer"></div>
+</body>
+</html>
