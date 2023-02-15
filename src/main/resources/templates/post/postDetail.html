@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('게시글 상세')">
+    <meta charset="utf-8">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/common :: menu(detail)">
+</nav>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게시글 상세</h2>
+    </div>
+    <hr class="my-4">
+
+    <table class="table table-striped">
+        <colgroup>
+            <col th:width="15"/>
+            <col th:width="90"/>
+            <col th:width="15"/>
+            <col th:width="90"/>
+        </colgroup>
+        <tbody>
+        <tr>
+            <th scope="row">글 번호</th>
+            <td th:text="${postDto.id}"></td>
+            <th scope="row">조회수</th>
+            <td th:text="0"></td>
+        </tr>
+        <tr>
+            <th scope="row">작성일</th>
+            <td th:text="${#temporals.format(postDto.createdDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <th scope="row">수정일</th>
+            <td th:text="${#temporals.format(postDto.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+        </tr>
+        <tr>
+            <th scope="row">작성자</th>
+            <td th:text="${postDto.author}"></td>
+        </tr>
+        <tr>
+            <th scope="row">제목</th>
+            <td colspan="4" th:text="${postDto.title}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <textarea th:text="${postDto.content}" class="form-control" id="content" rows="7" readonly></textarea><br>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <button class="btn btn-secondary" th:onclick="|location.href='@{/post/update/{postId}(postId=${postDto.id})}'|"
+                    type="button">수정</button>
+        </div>
+        <div class="col">
+            <form th:action="@{'/post/delete/' + ${postDto.id}}" method="post">
+                <input type="hidden" name="id" th:value="${postDto.id}"/>
+                <button class="btn btn-secondary">삭제</button>
+            </form>
+        </div>
+        <div class="col">
+            <button class="btn btn-secondary" th:onclick="|location.href='@{/post/list}'|" type="button">목록</button>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/footer.html" id="footer"></div>
+</body>
+</html>
